@@ -1,14 +1,16 @@
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { applyMiddleware, createStore } from 'redux';
-import thunk from 'redux-thunk';
+import { configureStore, Action, ThunkAction } from "@reduxjs/toolkit";
 
-import { rootReducer } from './root';
+import userReducer from './user/reducer';
+import gamesReducer from './games/reducer';
 
-export const store = createStore(
-  rootReducer,
-  composeWithDevTools(
-    applyMiddleware(
-      thunk,
-    ),
-  ),
-);
+export const store = configureStore({
+  reducer: {
+    userRedux: userReducer,
+    gamesRedux: gamesReducer,
+  },
+});
+
+export type AppDispatch = typeof store.dispatch;
+export type StoreType = ReturnType<typeof store.getState>;
+
+export type AppThunk<ReturnType = void> = ThunkAction<ReturnType, StoreType, unknown, Action<string>>;

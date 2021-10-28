@@ -1,22 +1,41 @@
+import { useHistory } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
+import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 
+// Redux
+import { useAppDispatch } from '../../store/hooks';
+import { login } from '../../store/user/actions';
+
+// Core
+import { ROUTES } from '../../core/constants/routes';
+
+// Components
+
+// Styles
 import './LoginPage.scss';
 
 export const LoginPage = () => {
+  const history = useHistory();
+  const dispatch = useAppDispatch();
+
   const initialValues = {
-    name: '',
+    username: '',
     password: '',
   };
 
   const validationSchema = yup.object().shape({
-    name: yup.string().required('Name is required!'),
+    username: yup.string().required('Name is required!'),
     password: yup.string().required('Password is required!'),
   });
 
-  const onSubmit = (name: string, password: string) => {
-    console.log('Values: ', name, password);
+  const onSubmit = async (username: string, password: string) => {
+    const isLogged = await dispatch(login({username, password})).unwrap();
+
+    if (isLogged) {
+      history.push(ROUTES.HOME);
+    }
   };
 
   return (
@@ -25,17 +44,17 @@ export const LoginPage = () => {
         initialValues={initialValues}
         validationSchema={validationSchema}
         onSubmit={values => {
-          onSubmit(values.name, values.password);
+          onSubmit(values.username, values.password);
         }}
       >
         {({ errors, values, handleChange }) => (
           <Form>
             <TextField
               label="Name"
-              name="name"
-              helperText={errors.name}
+              name="username"
+              helperText={errors.username}
               onChange={handleChange}
-              value={values.name}
+              value={values.username}
             />
             <TextField
               label="Password"
