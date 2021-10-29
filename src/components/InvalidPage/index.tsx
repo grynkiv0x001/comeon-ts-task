@@ -1,5 +1,11 @@
+import { ROUTES } from "../../core/constants/routes";
+import './InvalidPage.scss';
+
 export const InvalidPage = () => {
   return (
-    <h1>404 Not Found</h1>
+    <div className="not-found">
+      <h1 className="not-found__title">404 Not Found</h1>
+      <a href={ROUTES.HOME} className="not-found__link">Home page</a>
+    </div>
   );
 };
