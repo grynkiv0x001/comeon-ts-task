@@ -10,7 +10,7 @@ export const getCategoriesOperations = (state: IGamesReducer, { payload }: any):
 };
 
 export const filteredByCategory = (state: IGamesReducer, { payload }: any): IGamesReducer => {
-	const filteredGamesByCategory = state.games.filter(game => game.categories.includes(payload));
+	const filteredGamesByCategory = state.games.filter(game => game.categoryIds.includes(payload));
 
 	return { ...state, filteredGames: filteredGamesByCategory, category: payload };
 };
@@ -20,7 +20,7 @@ export const filteredBySearch = (state: IGamesReducer, { payload }: any): IGames
 		return { ...state, filteredGames: state.games };
 	}
 
-	const filteredGamesByCategory = state.games.filter(game => game.categories.includes(state.category));
+	const filteredGamesByCategory = state.games.filter(game => game.categoryIds.includes(state.category));
 	const filteredGames = filteredGamesByCategory.filter(game =>
 		game.name.toLowerCase().includes(payload.toLowerCase())
 	);

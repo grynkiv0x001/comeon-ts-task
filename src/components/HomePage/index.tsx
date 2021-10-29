@@ -60,7 +60,7 @@ export const HomePage = () => {
               <p className="user__info-name">{user.name}</p>
               <p className="user__info-event">{user.event}</p>
             </div>
-            <SearchField />
+            <SearchField handleChange={handleSearch} />
             <div className="home__header-logout">
               <Button onClick={handleLogout}>Logout</Button>
             </div>

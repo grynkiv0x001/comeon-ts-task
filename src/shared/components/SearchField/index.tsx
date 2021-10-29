@@ -1,7 +1,7 @@
 import { TextField } from "@mui/material";
 
-export const SearchField = () => {
+export const SearchField = ({ handleChange }: any) => {
   return (
-    <TextField fullWidth label="Search" />
+    <TextField fullWidth label="Search" onChange={handleChange} />
   );
 };

@@ -1,12 +1,12 @@
 import { Button } from "@mui/material";
 import { useHistory } from "react-router";
 import { Game } from "../../core/_models/Game";
-import { selectorGetGames } from "../../store/games/selectors";
+import { selectorGetFilteredGames } from "../../store/games/selectors";
 import { useAppSelector } from "../../store/hooks";
 
 export const Games = () => {
   const history = useHistory();
-  const games = useAppSelector(selectorGetGames);
+  const games = useAppSelector(selectorGetFilteredGames);
 
   console.log(games);
 

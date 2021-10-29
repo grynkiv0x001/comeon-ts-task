@@ -3,5 +3,5 @@ export interface Game {
   icon: string;
   name: string;
   description: string;
-  categories: number[];
+  categoryIds: number[];
 }
