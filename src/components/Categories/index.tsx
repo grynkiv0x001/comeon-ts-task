@@ -7,7 +7,6 @@ import { useAppDispatch, useAppSelector } from "../../store/hooks";
 
 export const Categories = () => {
   const dispatch = useAppDispatch();
-  const category = useAppSelector(selectorCurrentCategory);
   const categories = useAppSelector(selectorCategories);
 
   const handleClick = (id: number) => {

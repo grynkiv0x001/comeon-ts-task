@@ -3,6 +3,8 @@ import { Button, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useCookies } from 'react-cookie';
+import { toast } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 
 // Redux
 import { useAppDispatch } from '../../store/hooks';
@@ -15,6 +17,7 @@ import { ROUTES } from '../../core/constants/routes';
 
 // Styles
 import './LoginPage.scss';
+import { useEffect } from 'react';
 
 export const LoginPage = () => {
   const history = useHistory();
@@ -31,12 +34,19 @@ export const LoginPage = () => {
     password: yup.string().required('Password is required!'),
   });
 
+  useEffect(() => {
+    if (cookie.user) {
+      history.push(ROUTES.HOME);
+    }
+  }, [])
+
   const onSubmit = async (username: string, password: string) => {
     const user = await dispatch(login({username, password})).unwrap();
 
     if (user) {
       setCookie('user', user);
       history.push(ROUTES.HOME);
+      toast.success('Success!');
     }
   };
 
@@ -45,8 +55,9 @@ export const LoginPage = () => {
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
-        onSubmit={values => {
+        onSubmit={(values, { resetForm }) => {
           onSubmit(values.username, values.password);
+          resetForm();
         }}
       >
         {({ errors, values, handleChange }) => (

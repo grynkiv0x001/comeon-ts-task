@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { useCookies } from 'react-cookie';
+import { toast } from "react-toastify";
 import { Button } from "@mui/material";
 
 // Core
@@ -27,6 +28,7 @@ export const HomePage = () => {
   // Check if user is logged in
   useEffect(() => {
     if (!cookie?.user) {
+      toast.warn('Sign up first!');
       history.push(ROUTES.LOGIN);
     }
   }, []);
@@ -40,6 +42,7 @@ export const HomePage = () => {
 
 		removeCookie('user');
 
+    toast.success('You are successfully logged out!');
 		history.push(ROUTES.LOGIN);
 	};
   

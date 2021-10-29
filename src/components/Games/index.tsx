@@ -8,8 +8,6 @@ export const Games = () => {
   const history = useHistory();
   const games = useAppSelector(selectorGetFilteredGames);
 
-  console.log(games);
-
   const handleClick = (code: string) => {
     history.push(`/game/${code}`)
   }

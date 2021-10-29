@@ -1,6 +1,7 @@
 import { FC, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { injectStyle } from 'react-toastify/dist/inject-style';
 import { useCookies } from 'react-cookie';
 
 // Core
@@ -19,6 +20,9 @@ import { GamePage } from './components/GamePage';
 const App: FC = () => {
   const dispatch = useAppDispatch();
   const [cookies] = useCookies(['user']);
+
+  // Enable toastify
+  injectStyle();
 
   useEffect(() => {
 		if (cookies?.user) {

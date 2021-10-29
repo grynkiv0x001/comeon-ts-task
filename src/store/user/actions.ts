@@ -17,7 +17,7 @@ export const login = createAsyncThunk(USER_LOGIN, async (user: UserLogin): Promi
     const { data }: LoginResponse = await axios.post(API.LOGIN, user);
     return { ...data.player, username: user.username };
   } catch (error) {
-    toast('Name or password is invalid!');
+    toast.error('Name or password is invalid!');
     return false;
   }
 });
