@@ -1,10 +1,9 @@
 import { useHistory } from 'react-router-dom';
-import { Button, TextField } from '@mui/material';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
-import { injectStyle } from 'react-toastify/dist/inject-style';
+import { Button, TextField } from '@mui/material';
 
 // Redux
 import { useAppDispatch } from '../../store/hooks';

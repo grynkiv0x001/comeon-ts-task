@@ -2,8 +2,10 @@ import { Button } from "@mui/material";
 
 import { Category } from "../../core/_models/Category";
 import { filterByCategory } from "../../store/games/reducer";
-import { selectorCategories, selectorCurrentCategory } from "../../store/games/selectors";
+import { selectorCategories } from "../../store/games/selectors";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
+
+import './Categories.scss';
 
 export const Categories = () => {
   const dispatch = useAppDispatch();
@@ -14,10 +16,11 @@ export const Categories = () => {
   };
 
   return (
-    <div>
-      <ul>
+    <div className="filters-container">
+      <p className="filters-container__label">Filters: </p>
+      <ul className="filters">
         {categories.map((category: Category) => (
-          <Button key={category.id} onClick={() => handleClick(category.id)}>{category.name}</Button>
+          <p key={category.id} onClick={() => handleClick(category.id)} className="filters__item">{category.name}</p>
         ))}
       </ul>
     </div>

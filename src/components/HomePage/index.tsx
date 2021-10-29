@@ -19,6 +19,9 @@ import { Games } from "../Games";
 import { Categories } from "../Categories";
 import { SearchField } from "../../shared/components/SearchField";
 
+// Styles
+import './HomePage.scss';
+
 export const HomePage = () => {
   const history = useHistory();
 	const dispatch = useAppDispatch();
@@ -52,28 +55,30 @@ export const HomePage = () => {
 	}, []);
 
   return (
-    <div className="home">
-			<div className="home__header">
-        {user && (
-          <div className="user">
-            <div className="user__avatar">
-              <img src={user.avatar} alt="avatar" />
+    <>
+      {user && (
+        <div className="home">
+          <div className="home__header">
+              <div className="user">
+                <div className="user__info">
+                  <div className="user__info-avatar">
+                    <img src={user.avatar} alt="avatar" className="user__info-avatar-img" />
+                  </div>
+                  <p className="user__info-name">{user.name}</p>
+                </div>
+                <div className="user__info-logout">
+                  <Button onClick={handleLogout} variant="contained">Logout</Button>
+                </div>
+              </div>
             </div>
-            <div className="user__info">
-              <p className="user__info-name">{user.name}</p>
-              <p className="user__info-event">{user.event}</p>
+            <div className="home__body">
+              <h2 className="home__body-welcome">Welcome back! {user.event}</h2>
+              <Categories />
+              <SearchField handleChange={handleSearch} />
+              <Games />
             </div>
-            <SearchField handleChange={handleSearch} />
-            <div className="home__header-logout">
-              <Button onClick={handleLogout}>Logout</Button>
-            </div>
-          </div>
-        )}
-			</div>
-			<div className="home__body">
-        <Categories />
-        <Games />
-			</div>
-		</div>
+        </div>
+      )}
+    </>
   )
 };

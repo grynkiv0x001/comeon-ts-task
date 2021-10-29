@@ -5,6 +5,7 @@ import { useCookies } from "react-cookie";
 import { ROUTES } from "../../core/constants/routes";
 
 import './GamePage.scss';
+import { Button } from "@mui/material";
 
 const windowLocal: any = window;
 
@@ -25,9 +26,16 @@ export const GamePage = () => {
     }
   }, [name, windowLocal.comeon]);
 
+  const handleClick = () => {
+    history.push(ROUTES.HOME);
+  };
+
   return (
-    <div className="game-place">
-      <div id="game-launch" />
-    </div>
+    <>
+      <Button className="button-back" onClick={handleClick} variant="contained">Go back</Button>
+      <div className="game-place">
+        <div id="game-launch" />
+      </div>
+    </>
   );
 };

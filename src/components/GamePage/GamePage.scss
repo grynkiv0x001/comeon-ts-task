@@ -1,7 +1,19 @@
 .game-place {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  height: 100vh;
   color: #fff;
+  height: 100vh;
+}
+
+#game-launch {
+  height: 100%;
+
+  iframe {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.button-back {
+  position: absolute !important;
+  top: 5%;
+  right: 2%;
 }
