@@ -1,1 +1,15 @@
+.form {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 80vh;
+  justify-content: center;
 
+  &__field {
+    margin-bottom: 20px !important;
+  }
+
+  &__submit {
+    
+  }
+}

@@ -3,6 +3,7 @@ import { Button, TextField } from '@mui/material';
 import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
+import { useCookies } from 'react-cookie';
 
 // Redux
 import { useAppDispatch } from '../../store/hooks';
@@ -19,6 +20,7 @@ import './LoginPage.scss';
 export const LoginPage = () => {
   const history = useHistory();
   const dispatch = useAppDispatch();
+  const [cookie, setCookie] = useCookies(['user']);
 
   const initialValues = {
     username: '',
@@ -34,6 +36,7 @@ export const LoginPage = () => {
     const isLogged = await dispatch(login({username, password})).unwrap();
 
     if (isLogged) {
+      setCookie('user', isLogged);
       history.push(ROUTES.HOME);
     }
   };
@@ -48,13 +51,14 @@ export const LoginPage = () => {
         }}
       >
         {({ errors, values, handleChange }) => (
-          <Form>
+          <Form className="form">
             <TextField
               label="Name"
               name="username"
               helperText={errors.username}
               onChange={handleChange}
               value={values.username}
+              className="form__field"
             />
             <TextField
               label="Password"
@@ -63,8 +67,15 @@ export const LoginPage = () => {
               helperText={errors.password}
               onChange={handleChange}
               value={values.password}
+              className="form__field"
             />
-            <Button type="submit" variant="outlined">Sign in</Button>
+            <Button
+              type="submit"
+              variant="outlined"
+              className="form__submit"
+            >
+              Sign in
+            </Button>
           </Form>
         )}
       </Formik>

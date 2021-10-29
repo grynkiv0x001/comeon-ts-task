@@ -11,5 +11,5 @@ export interface UserLogin {
 };
 
 export interface UserLogout {
-  name: string;
+  username: string;
 };
