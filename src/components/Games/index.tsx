@@ -1,8 +1,15 @@
-import { Button } from "@mui/material";
 import { useHistory } from "react-router";
+
+// Core
 import { Game } from "../../core/_models/Game";
+
+// Redux
 import { selectorGetFilteredGames } from "../../store/games/selectors";
 import { useAppSelector } from "../../store/hooks";
+
+import { GameCard } from "../GameCard";
+
+import './Games.scss';
 
 export const Games = () => {
   const history = useHistory();
@@ -13,12 +20,14 @@ export const Games = () => {
   }
 
   return (
-    <div>
-      <ul>
-        {games.map((game: Game) => (
-          <Button key={game.code} onClick={() => handleClick(game.code)}>{game.name}</Button>
-        ))}
-      </ul>
+    <div className="games">
+      {games.map((game: Game) => (
+        <GameCard
+          key={game.code}
+          game={game}
+          handleClick={() => handleClick(game.code)}
+        />
+      ))}
     </div>
   );
 };
