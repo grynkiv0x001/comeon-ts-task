@@ -1,0 +1,20 @@
+.filters-container {
+  align-items: center;
+  display: flex;
+  font-family: Arial;
+  justify-content: start;
+
+  &__label {
+    font-size: 20px;
+  }
+}
+
+.filters {
+  display: flex;
+  padding: 0;
+
+  &__item {
+    cursor: pointer;
+    margin-left: 20px;
+  }
+}
