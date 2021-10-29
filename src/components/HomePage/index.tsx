@@ -31,7 +31,7 @@ export const HomePage = () => {
     }
   }, []);
 
-	const handleChangeSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
 		dispatch(filterBySearch(event.target.value));
 	};
 
