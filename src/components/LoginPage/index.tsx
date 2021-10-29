@@ -1,6 +1,5 @@
 import { useHistory } from 'react-router-dom';
 import { Button, TextField } from '@mui/material';
-import { toast } from 'react-toastify';
 import { Form, Formik } from 'formik';
 import * as yup from 'yup';
 import { useCookies } from 'react-cookie';
@@ -33,10 +32,10 @@ export const LoginPage = () => {
   });
 
   const onSubmit = async (username: string, password: string) => {
-    const isLogged = await dispatch(login({username, password})).unwrap();
+    const user = await dispatch(login({username, password})).unwrap();
 
-    if (isLogged) {
-      setCookie('user', isLogged);
+    if (user) {
+      setCookie('user', user);
       history.push(ROUTES.HOME);
     }
   };

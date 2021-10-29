@@ -1,15 +1,22 @@
-import { AppBar, Button, debounce, Icon, IconButton, Toolbar } from "@mui/material";
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import { toast } from "react-toastify";
+import { useCookies } from 'react-cookie';
+import { Button } from "@mui/material";
+
+// Core
 import { ROUTES } from "../../core/constants/routes";
+
+// Redux
 import { getCategories, getGames } from "../../store/games/actions";
 import { filterBySearch } from "../../store/games/reducer";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { logout } from "../../store/user/actions";
 import { selectorGetUser } from "../../store/user/selectors";
-import { useCookies } from 'react-cookie';
-import { Box } from "@mui/system";
+
+// Components
+import { Games } from "../Games";
+import { Categories } from "../Categories";
+import { SearchField } from "../../shared/components/SearchField";
 
 export const HomePage = () => {
   const history = useHistory();
@@ -28,8 +35,6 @@ export const HomePage = () => {
 		dispatch(filterBySearch(event.target.value));
 	};
 
-	const debouncedChangeHandler = useMemo(() => debounce(handleChangeSearch, 500), [history, user]);
-
 	const handleLogout = async () => {
 		await dispatch(logout({ username: user.username })).unwrap();
 
@@ -41,8 +46,6 @@ export const HomePage = () => {
 	useEffect(() => {
 		dispatch(getGames());
 		dispatch(getCategories());
-
-    console.log();
 	}, []);
 
   return (
@@ -57,16 +60,16 @@ export const HomePage = () => {
               <p className="user__info-name">{user.name}</p>
               <p className="user__info-event">{user.event}</p>
             </div>
+            <SearchField />
             <div className="home__header-logout">
               <Button onClick={handleLogout}>Logout</Button>
             </div>
           </div>
         )}
 			</div>
-
-			<div className="home__content">
-				<div className="home__content__body">
-				</div>
+			<div className="home__body">
+        <Categories />
+        <Games />
 			</div>
 		</div>
   )

@@ -14,6 +14,7 @@ import { updateUser } from './store/user/reducer';
 import { LoginPage } from './components/LoginPage';
 import { HomePage } from './components/HomePage';
 import { InvalidPage } from './components/InvalidPage';
+import { GamePage } from './components/GamePage';
 
 const App: FC = () => {
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const App: FC = () => {
         <Switch>
           <Route exact path={ROUTES.LOGIN} component={LoginPage} />
           <Route exact path={ROUTES.HOME} component={HomePage} />
+          <Route exact path={ROUTES.GAME} component={GamePage} />
           <Route exact path={ROUTES.INVALID} component={InvalidPage} />
         </Switch>
       </Router>
